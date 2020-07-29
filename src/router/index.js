@@ -8,24 +8,7 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    redirect: "/home",
-  },
-  {
-    path: "/home",
-    name: "Home",
-    component: () => import(/* webpackChunkName: "home" */ "../views/Home.vue"),
-    meta: {
-      requiresAuth: true,
-    },
-  },
-  {
-    path: "/about",
-    name: "About",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
-    meta: {
-      requiresAuth: true,
-    },
+    redirect: "/login",
   },
   {
     path: "/login",
@@ -43,6 +26,32 @@ const routes = [
       import(/* webpackChunkName: "register" */ "../views/Register.vue"),
     meta: {
       requiresAnon: true,
+    },
+  },
+  {
+    path: "/home",
+    name: "Home",
+    component: () => import(/* webpackChunkName: "home" */ "../views/Home.vue"),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/add",
+    name: "AddWorkout",
+    component: () =>
+      import(/* webpackChunkName: "add" */ "../views/AddWorkout.vue"),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/settings",
+    name: "Settings",
+    component: () =>
+      import(/* webpackChunkName: "settings" */ "../views/Settings.vue"),
+    meta: {
+      requiresAuth: true,
     },
   },
 ];

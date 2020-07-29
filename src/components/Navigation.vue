@@ -38,7 +38,7 @@
               v-on:click="logout()"
               class="button is-light"
             >
-              Logout
+              Logout ({{ this.email }})
             </button>
             <span v-else>
               <router-link to="/register" class="button is-primary">
@@ -63,9 +63,11 @@ export default {
   data() {
     return {
       loggedIn: false,
+      email: "",
       links: [
         { name: "Home", url: "/home" },
-        { name: "About", url: "/about" },
+        { name: "Add Workout", url: "/add" },
+        { name: "Settings", url: "/settings" },
       ],
     };
   },
@@ -76,9 +78,12 @@ export default {
     },
   },
   beforeMount() {
-    firebase
-      .auth()
-      .onAuthStateChanged((user) => user && (this.loggedIn = true));
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.loggedIn = true;
+        this.email = firebase.auth().currentUser.email;
+      }
+    });
   },
 };
 </script>
