@@ -1,9 +1,75 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
+    <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <router-link class="navbar-item" to="/">
+          <h1 class="title">Gym Buddy</h1>
+        </router-link>
+
+        <a
+          role="button"
+          class="navbar-burger burger"
+          aria-label="menu"
+          aria-expanded="false"
+          data-target="navbarBasicExample"
+        >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+          <router-link
+            v-for="link in links"
+            :key="link.name"
+            :to="link.url"
+            class="navbar-item"
+          >
+            {{ link.name }}
+          </router-link>
+        </div>
+
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+              <router-link to="/register" class="button is-primary">
+                Register
+              </router-link>
+              <router-link to="/login" class="button is-light">
+                Login
+              </router-link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <section class="section">
+      <div class="container">
+        <router-view />
+      </div>
+    </section>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      links: [
+        { name: "Home", url: "/" },
+        { name: "About", url: "/about" },
+      ],
+    };
+  },
+};
+</script>
+
+<style scoped>
+.title {
+  color: white;
+  font-size: 1.5em;
+}
+</style>
