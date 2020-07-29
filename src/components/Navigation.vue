@@ -64,7 +64,7 @@ export default {
     return {
       loggedIn: false,
       links: [
-        { name: "Home", url: "/" },
+        { name: "Home", url: "/home" },
         { name: "About", url: "/about" },
       ],
     };
