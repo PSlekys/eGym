@@ -71,6 +71,7 @@ export default {
   },
   methods: {
     logout() {
+      this.loggedIn = false;
       firebase.auth().signOut();
     },
   },
