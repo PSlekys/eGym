@@ -65,7 +65,7 @@ export default {
         .auth()
         .signInWithEmailAndPassword(this.email, this.password)
         .then(
-          () => this.$router.push("/properties"),
+          () => this.$router.push("/"),
           (error) => {
             this.error = true;
             this.errorMessage = error.message;
