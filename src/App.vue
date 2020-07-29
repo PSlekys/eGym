@@ -20,7 +20,7 @@
       </div>
 
       <div id="navbarBasicExample" class="navbar-menu">
-        <div class="navbar-start">
+        <div class="navbar-start" v-if="loggedIn">
           <router-link
             v-for="link in links"
             :key="link.name"
@@ -34,12 +34,17 @@
         <div class="navbar-end">
           <div class="navbar-item">
             <div class="buttons">
-              <router-link to="/register" class="button is-primary">
-                Register
-              </router-link>
-              <router-link to="/login" class="button is-light">
-                Login
-              </router-link>
+              <button v-if="loggedIn" class="button is-light">
+                Logout
+              </button>
+              <span v-else>
+                <router-link to="/register" class="button is-primary">
+                  Register
+                </router-link>
+                <router-link to="/login" class="button is-light">
+                  Login
+                </router-link>
+              </span>
             </div>
           </div>
         </div>
@@ -55,14 +60,23 @@
 </template>
 
 <script>
+import firebase from "firebase/app";
+import "firebase/auth";
+
 export default {
   data() {
     return {
+      loggedIn: false,
       links: [
         { name: "Home", url: "/" },
         { name: "About", url: "/about" },
       ],
     };
+  },
+  beforeMount() {
+    firebase
+      .auth()
+      .onAuthStateChanged((user) => user && (this.loggedIn = true));
   },
 };
 </script>
