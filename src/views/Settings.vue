@@ -1,7 +1,7 @@
 <template>
   <div class="settings">
     <h2 class="subtitle">Settings</h2>
-    <form>
+    <form v-on:submit.prevent="updatefire">
       <div class="field">
         <label class="label" for="name">Name</label>
         <div class="control">
@@ -24,12 +24,35 @@
 </template>
 
 <script>
+import firebase from "firebase/app";
+import "firebase/firestore";
+import "firebase/auth";
+
 export default {
   name: "Settings",
   data() {
     return {
       name: "",
     };
+  },
+  methods: {
+    update() {
+      firebase
+        .firestore()
+        .collection("users")
+        .doc(firebase.auth().currentUser.uid)
+        .update({
+          name: this.name,
+        });
+    },
+  },
+  beforeMount() {
+    firebase
+      .firestore()
+      .collection("users")
+      .doc(firebase.auth().currentUser.uid)
+      .get()
+      .then((doc) => (this.name = doc.data().name));
   },
 };
 </script>
