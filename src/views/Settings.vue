@@ -102,7 +102,7 @@ export default {
         .firestore()
         .collection("users")
         .doc(firebase.auth().currentUser.uid)
-        .update({
+        .set({
           firstname: this.firstname,
           lastname: this.lastname,
           gender: this.gender,
@@ -131,9 +131,11 @@ export default {
       .get()
       .then(
         (doc) => {
-          this.firstname = doc.data().firstname;
-          this.lastname = doc.data().lastname;
-          this.gender = doc.data().gender;
+          if (doc) {
+            this.firstname = doc.data().firstname;
+            this.lastname = doc.data().lastname;
+            this.gender = doc.data().gender;
+          }
         },
         (error) => {
           this.error = true;
