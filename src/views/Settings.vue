@@ -32,7 +32,7 @@
 
       <div class="field-body">
         <div class="field">
-          <label class="label">Lytis</label>
+          <label class="label">Gender</label>
           <div class="control">
             <label class="radio">
               <input type="radio" name="gender" v-model="gender" value="male" />
@@ -95,7 +95,9 @@ export default {
         .collection("users")
         .doc(firebase.auth().currentUser.uid)
         .update({
-          name: this.name,
+          firstname: this.firstname,
+          lastname: this.lastname,
+          gender: this.gender,
         });
     },
   },
@@ -106,7 +108,11 @@ export default {
       .doc(firebase.auth().currentUser.uid)
       .get()
       .then(
-        (doc) => (this.name = doc.data().name),
+        (doc) => {
+          this.firstname = doc.data().firstname;
+          this.lastname = doc.data().lastname;
+          this.gender = doc.data().gender;
+        },
         (error) => {
           this.error = true;
           this.errorType = "is-danger";
