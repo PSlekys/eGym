@@ -3,15 +3,60 @@
     <h2 class="subtitle">Settings</h2>
     <Notification :display="error" :type="errorType" :message="errorMessage" />
     <form v-on:submit.prevent="update">
-      <div class="field">
-        <label class="label" for="name">Name</label>
-        <div class="control">
-          <input
-            class="input"
-            type="text"
-            v-model="name"
-            placeholder="Petras Slekys"
-          />
+      <div class="field-body">
+        <div class="field">
+          <label class="label">Name</label>
+          <div class="control">
+            <input
+              class="input"
+              type="text"
+              placeholder="Name"
+              v-model="firstname"
+              required
+            />
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Surname</label>
+          <div class="control">
+            <input
+              class="input"
+              type="text"
+              placeholder="Surname"
+              v-model="lastname"
+              required
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="field-body">
+        <div class="field">
+          <label class="label">Lytis</label>
+          <div class="control">
+            <label class="radio">
+              <input type="radio" name="gender" v-model="gender" value="male" />
+              Male
+            </label>
+            <label class="radio">
+              <input
+                type="radio"
+                name="gender"
+                v-model="gender"
+                value="female"
+              />
+              Female
+            </label>
+            <label class="radio">
+              <input
+                type="radio"
+                name="gender"
+                v-model="gender"
+                value="other"
+              />
+              Other
+            </label>
+          </div>
         </div>
       </div>
 
@@ -35,7 +80,9 @@ export default {
   components: { Notification },
   data() {
     return {
-      name: "",
+      firstname: "",
+      lastname: "",
+      gender: "",
       error: false,
       errorType: "",
       errorMessage: "",
@@ -69,3 +116,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.field-body {
+  margin-bottom: 1.5em;
+}
+</style>
