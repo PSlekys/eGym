@@ -1,6 +1,11 @@
 <template>
   <div class="register">
-    <Notification :display="error" type="is-danger" :message="errorMessage" />
+    <Notification
+      v-if="error"
+      v-on:close="error = false"
+      type="is-danger"
+      :message="errorMessage"
+    />
     <form v-on:submit.prevent="register">
       <div class="field">
         <label class="label">Email</label>

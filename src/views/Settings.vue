@@ -1,7 +1,12 @@
 <template>
   <div class="settings">
     <h2 class="subtitle">Settings</h2>
-    <Notification :display="error" :type="errorType" :message="errorMessage" />
+    <Notification
+      v-if="error"
+      v-on:close="error = false"
+      :type="errorType"
+      :message="errorMessage"
+    />
     <form v-on:submit.prevent="update">
       <div class="field-body">
         <div class="field">
