@@ -131,7 +131,7 @@ export default {
       .get()
       .then(
         (doc) => {
-          if (doc) {
+          if (doc.data()) {
             this.firstname = doc.data().firstname;
             this.lastname = doc.data().lastname;
             this.gender = doc.data().gender;
