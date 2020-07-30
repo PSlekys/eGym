@@ -98,7 +98,19 @@ export default {
           firstname: this.firstname,
           lastname: this.lastname,
           gender: this.gender,
-        });
+        })
+        .then(
+          () => {
+            this.error = true;
+            this.errorType = "is-success";
+            this.errorMessage = "You have successfully updated your details.";
+          },
+          (error) => {
+            this.error = true;
+            this.errorType = "is-danger";
+            this.errorMessage = error.message;
+          }
+        );
     },
   },
   beforeMount() {
