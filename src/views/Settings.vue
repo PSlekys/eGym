@@ -62,7 +62,13 @@
 
       <div class="field">
         <div class="control">
-          <button class="button is-primary" type="submit">Update</button>
+          <button
+            class="button is-primary"
+            :class="loading && 'is-loading'"
+            type="submit"
+          >
+            Update
+          </button>
         </div>
       </div>
     </form>
@@ -83,6 +89,7 @@ export default {
       firstname: "",
       lastname: "",
       gender: "",
+      loading: false,
       error: false,
       errorType: "",
       errorMessage: "",
@@ -90,6 +97,7 @@ export default {
   },
   methods: {
     update() {
+      this.loading = true;
       firebase
         .firestore()
         .collection("users")
@@ -101,11 +109,13 @@ export default {
         })
         .then(
           () => {
+            this.loading = false;
             this.error = true;
             this.errorType = "is-success";
             this.errorMessage = "You have successfully updated your details.";
           },
           (error) => {
+            this.loading = false;
             this.error = true;
             this.errorType = "is-danger";
             this.errorMessage = error.message;
