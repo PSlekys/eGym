@@ -99,6 +99,8 @@ export default {
         .collection("workouts")
         .doc(id)
         .delete();
+
+      this.workouts = this.workouts.filter((workout) => workout.id !== id);
     },
   },
   beforeMount() {
